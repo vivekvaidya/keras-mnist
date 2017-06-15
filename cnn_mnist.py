@@ -10,7 +10,7 @@ from keras import backend as kr
 # parameters
 classes = 10
 batch_size = 128
-iterations = 24
+iterations = 12
 
 # split data between training and testing sets
 (trainx, trainy), (testx, testy) = mnist.load_data()
@@ -36,7 +36,7 @@ testx /= 255
 trainy = keras.utils.to_categorical(trainy, classes)
 testy = keras.utils.to_categorical(testy, classes)
 
-# setup the model, add layers, compile and fit
+# setup the model, add layers
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3,3), activation='relu', input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -46,8 +46,10 @@ model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(classes, activation='softmax'))
 
+# compile model
 model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(), metrics=['accuracy'])
 
+# fit the model
 model.fit(trainx, trainy, batch_size=batch_size, epochs=iterations, verbose=1, validation_data=(testx, testy))
 
 # measure performance
