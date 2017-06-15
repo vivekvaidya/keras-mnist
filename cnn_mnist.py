@@ -10,7 +10,7 @@ from keras import backend as kr
 # parameters
 classes = 10
 batch_size = 128
-iterations = 12
+iterations = 24
 
 # split data between training and testing sets
 (trainx, trainy), (testx, testy) = mnist.load_data()
